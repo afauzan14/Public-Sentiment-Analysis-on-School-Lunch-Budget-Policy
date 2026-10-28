@@ -1,160 +1,111 @@
 # 🍱 Public Sentiment Analysis on School Lunch Budget Policy
-### Analisis Sentimen Publik & Social Network Analysis (SNA) Terhadap Kebijakan Anggaran Rp10.000 Makan Siang Bergizi Gratis (MBG) di Media Sosial X
+### Public Sentiment & Social Network Analysis (SNA) on the Rp10,000 Free Nutritious Meal (MBG) Budget Allocation on X (Twitter)
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Jupyter Notebook](https://img.shields.io/badge/Notebook-Jupyter-orange?logo=jupyter&logoColor=white)](Final_Project_Data_Mining_Group_B.ipynb)
 [![Dataset](https://img.shields.io/badge/Dataset-Twitter%20%2F%20X-1DA1F2?logo=x&logoColor=white)](data_sentimen.csv)
 [![NLP](https://img.shields.io/badge/NLP-Text%20Mining%20%26%20SNA-success)]()
 
 ---
 
-## 📌 Ringkasan Proyek (Project Overview)
+## 📌 Project Overview & Business Understanding
 
-Program **Makan Bergizi Gratis (MBG)** merupakan salah satu program strategis nasional yang ditujukan bagi lebih dari 83 juta penerima manfaat (anak sekolah, balita, dan ibu hamil) dengan tujuan utama menekan angka *stunting*, meningkatkan gizi anak, dan mendukung perkembangan kognitif generasi muda.
+The **Free Nutritious Meal (*Makan Bergizi Gratis* / MBG)** program is an Indonesian national strategic initiative targeting over 83 million beneficiaries—including schoolchildren, toddlers, and expectant mothers—with the primary goal of alleviating childhood stunting, improving nutritional intake, and supporting cognitive development.
 
-Pada perjalanannya, muncul diskursus publik yang hangat ketika estimasi alokasi anggaran yang semula direncanakan **Rp15.000 per porsi** disimulasikan menjadi **Rp10.000 per porsi**. Penyesuaian ini memicu berbagai tanggapan dari masyarakat, pakar gizi, praktisi kuliner, dan pengamat kebijakan fiskal.
+During its preparatory phase, intense public debate emerged when the estimated budget allocation, originally proposed at **Rp15,000 per meal portion**, was simulated down to **Rp10,000 per portion**. This fiscal adjustment prompted widespread discourse across civil society, pediatric nutritionists, culinary professionals, and economic observers.
 
-Repositori ini menyajikan analisis komprehensif mengenai **sentimen publik dan dinamika percakapan di media sosial X (Twitter)** terkait perubahan anggaran tersebut dengan pendekatan:
-1. **Natural Language Processing (NLP) & Text Mining** untuk ekstraksi sentimen dan identifikasi isu utama.
-2. **Social Network Analysis (SNA)** untuk memetakan klaster aktor (Pro, Kontra, Media, dan Outlier/Buzzer).
-3. **Analisis Pemengaruh (Key Influencers) & Tren Waktu** untuk melihat eskalasi opini publik.
-
----
-
-## 🎯 Pertanyaan Penelitian (Research Questions)
-
-1. **Bagaimana distribusi sentimen publik** terhadap penyesuaian anggaran Rp10.000 per porsi untuk program Makan Siang Bergizi?
-2. **Apa saja narasi dan kekhawatiran utama** yang disuarakan oleh masyarakat di media sosial X?
-3. **Bagaimana struktur peta jaringan percakapan (SNA)** antar-aktor dan siapa saja pemengaruh (*key opinion leaders*) paling dominan?
+This repository delivers a comprehensive data-driven investigation into **public sentiment and conversational dynamics on X (Twitter)** regarding the budget revision, using:
+1. **Natural Language Processing (NLP) & Text Mining** for sentiment classification and thematic topic discovery.
+2. **Social Network Analysis (SNA)** to map cluster structures (Critical/Opposing, Supportive, Media Broadcast, and Coordinated Networks).
+3. **Key Opinion Leader (KOL) & Temporal Escalation Analysis** to trace public opinion formation and virality spikes.
 
 ---
 
-## 📊 Metodologi & Alur Kerja (Pipeline)
+## 🎯 Research Questions
+
+1. **What is the overall sentiment distribution** regarding the proposed Rp10,000 per meal budget policy among social media users?
+2. **What are the dominant public concerns, narratives, and critiques** emerging from conversations on X?
+3. **What does the communication network topology (SNA) reveal** about polarization, echo chambers, and key opinion leaders?
+
+---
+
+## 🔬 Methodology & Analytical Pipeline
 
 ```mermaid
 flowchart LR
-    A[Data Crawling<br/>Twitter/X API] --> B[Data Cleaning & Preprocessing<br/>Regex, Sastrawi, Stopwords]
-    B --> C[Sentiment Labeling & Classification<br/>Positif, Negatif, Netral]
-    C --> D[Exploratory Data Analysis<br/>Tren & WordCloud]
-    C --> E[Social Network Analysis<br/>Gephi / NetworkX]
-    D --> F[Insight & Rekomendasi Kebijakan]
+    A["Data Crawling<br/>Twitter / X API"] --> B["Preprocessing & NLP<br/>Regex, Sastrawi, Stopwords"]
+    B --> C["Sentiment Labeling<br/>Positive, Negative, Neutral"]
+    C --> D["Exploratory Data Analysis<br/>Temporal Trends & WordCloud"]
+    C --> E["Social Network Analysis<br/>Gephi / NetworkX"]
+    D --> F["Insights & Policy Recommendations"]
     E --> F
 ```
 
-### 1. Pengumpulan Data (Crawling)
-- **Sumber Data:** Media sosial X (Twitter).
-- **Periode Pengambilan Data:** 15 November 2024 – 14 Desember 2024.
-- **Kata Kunci Pencarian (Keywords):**
+### 1. Data Collection (Crawling)
+* **Platform:** Social Media platform X (formerly Twitter).
+* **Observation Period:** November 15, 2024 – December 14, 2024.
+* **Search Keywords:**
   `"makan siang gratis prabowo"`, `"janji makan siang gratis"`, `"makan siang gratis sekolah"`, `"makan bergizi gratis"`, `"makan siang gratis sepuluh ribu"`, `"makan siang 10.000"`, `"Rp10ribu makanan bergizi"`, `"anggaran makan bergizi"`, `"makan bergizi rp10.000"`, `"makan gratis harga rp10ribu"`.
-- **Total Volume Data:** **3.065 cuitan mentah** ➡️ **2.252 cuitan unik** setelah pembersihan dan deduplikasi.
+* **Total Corpus Volume:** **3,065 raw posts** ➡️ **2,252 unique posts** post-cleaning and deduplication.
 
-### 2. Pra-pemrosesan Teks (Text Preprocessing)
-- **Cleaning:** Menghapus URL, mention username (`@username`), simbol, angka, dan emoji.
-- **Case Folding & Normalization:** Menyeragamkan karakter ke huruf kecil.
-- **Stopwords Removal:** Mengeliminasi kata umum bahasa Indonesia menggunakan pustaka `Sastrawi`.
-- **Stemming:** Reduksi kata berimbuhan ke kata dasar.
+### 2. Text Preprocessing & Hygiene
+* **Data Cleansing:** Stripped hyperlinks, user mentions (`@username`), special characters, numbers, and emojis.
+* **Case Folding & Normalization:** Standardized text into uniform lowercase.
+* **Stopword Removal:** Filtered common non-contextual Indonesian terms using the `Sastrawi` NLP package.
+* **Stemming:** Reduced morphological inflections to foundational root words.
 
 ---
 
-## 📈 Temuan Utama (Key Findings)
+## 📈 Key Findings
 
-### 1. Distribusi Sentimen Publik
-Dari **2.252 mention** yang dianalisis:
+### 1. Public Sentiment Distribution
+Across the **2,252 unique posts** analyzed:
 
-| Kategori Sentimen | Persentase | Narasi Utama Percakapan |
+| Sentiment Category | Proportion | Core Discussion Narratives |
 | :--- | :---: | :--- |
-| **Negatif** 🔴 | **50.3%** | Skeptis terhadap kecukupan gizi dengan pagu Rp10.000, kekhawatiran pemotongan margin vendor/catering, kekhawatiran beban APBN/utang luar negeri, serta dampak terhadap pengelola kantin sekolah. |
-| **Netral** ⚪ | **28.7%** | Laporan pemberitaan media massa, perbincangan netral, serta kutipan pernyataan resmi tokoh politik/pejabat publik. |
-| **Positif** 🟢 | **21.0%** | Apresiasi atas komitmen realisasi program, harapan pengurangan beban ekonomi orang tua murid, serta potensi perputaran ekonomi lokal (UMKM pangan). |
-
-### 2. Tren Volume Percakapan
-- Perbincangan mengalami kenaikan bertahap sejak akhir November 2024.
-- **Puncak Percakapan (Spike):** Terjadi pada **13 Desember 2024** mencapai **478 cuitan per hari**, dipicu oleh rilis berita konfirmasi simulasi anggaran Rp10.000/porsi.
-
-### 3. Pemetaan Jaringan Sosial (Social Network Analysis)
-- **Pusat Mention (Hub):** Akun `@prabowo` menjadi pusat perhatian utama dengan lebih dari **303 mentions**.
-- **Struktur Klaster:**
-  - **Klaster Tengah (Kontra):** Mendominasi volume percakapan utama dengan interaktivitas tinggi.
-  - **Klaster Media:** Menghubungkan berbagai klaster melalui penyebaran berita reguler.
-  - **Klaster Outlier (Pro):** Terdapat kelompok akun pendukung yang membentuk sub-jaringan terisolasi di pinggir graf (*outlier*), dengan indikasi perilaku terkoordinasi/buzzer yang dominan berinteraksi hanya di internal kelompoknya.
-
-### 4. Top Influencers (Berdasarkan Engagement)
-- **Akun Kontra / Kritis:** `@realfedinuril` (38.544 engagement), `@kkmanti` (15.644 engagement), `@hermawan_devina` (13.905 engagement), `@andikamalreza`, `@jhonsitorus_18`.
-- **Akun Media Berpengaruh:** `@kompascom` (2.824 engagement) mencatatkan tingkat efisiensi interaksi tertinggi per postingan.
-
-### 5. Tagar Terpopuler
-- `#PEKNAS` (23 mentions)
-- `#Prabowo` (15 mentions)
-- `#BadanGiziNasional` (15 mentions)
-- `#MakanBergiziGratis` (12 mentions)
-- `#MBG10000Cukup` (10 mentions)
+| **Negative** 🔴 | **50.3%** | Skepticism regarding dietary nutritional adequacy at the Rp10,000 threshold, concerns over vendor margin reductions affecting food quality, national budget (APBN) strain, and disruption to local school canteens. |
+| **Neutral** ⚪ | **28.7%** | Mainstream news reporting, factual discourse, policy updates, and verbatim statements from government officials. |
+| **Positive** 🟢 | **21.0%** | Commendation for program execution, anticipation of reduced household food expenditure for families, and potential economic stimulation for local agri-food micro-enterprises. |
 
 ---
 
-## 💡 Rekomendasi Kebijakan (Policy Recommendations)
-
-1. **Penyesuaian Anggaran Berbasis Regional (Disparitas Harga Pangan):**
-   Standar Rp10.000 perlu dievaluasi dengan memperhitungkan indeks kemahalan harga pangan antar-wilayah (terutama kawasan 3T).
-2. **Transparansi Distribusi & Rantai Pasok Digital:**
-   Penyediaan dashboard digital terbuka untuk mengawasi alokasi dana dari kas negara hingga ke menu makanan siswa guna memitigasi potensi kebocoran anggaran.
-3. **Pemberdayaan Kantin Sekolah & UMKM Lokal:**
-   Melibatkan pengelola kantin lokal dan UMKM sebagai vendor penyedia agar program memperkuat ekosistem ekonomi sekolah, bukan mematikan mata pencaharian warga sekitar.
+### 2. Temporal Conversation Trends
+* Discussion volume experienced steady growth starting in late November 2024.
+* **Virality Peak:** Occurred on **December 13, 2024**, reaching **478 posts within a single day**, triggered by official press statements confirming the Rp10,000 budget trial.
 
 ---
 
-## 📁 Struktur Direktori Repositori
-
-```text
-├── Capstone Kel B.pdf                                # Slide presentasi laporan akhir proyek
-├── Crawling_Group_02_~_CapStone_2_(UAS).ipynb        # Script notebook pengumpulan data Twitter
-├── Final_Project_Data_Mining_Group_B.ipynb           # Notebook utama pemrosesan, visualisasi & analisis
-├── data_sentimen.csv                                 # Dataset hasil pelabelan sentimen (2.252 baris)
-├── tweets-data/                                      # Kumpulan raw CSV hasil pencarian kata kunci
-│   ├── anggaran_makan_bergizi(NovDes2024).csv
-│   ├── makan_bergizi_gratis(NovDes2024).csv
-│   ├── makan_siang_10.000(NovDes2024).csv
-│   └── ... (file dataset kata kunci lainnya)
-└── README.md                                         # Dokumentasi proyek
-```
+### 3. Social Network Analysis (SNA) & Cluster Topology
+* **Central Interaction Hub:** The official account `@prabowo` formed the primary nexus of the network with over **303 inbound mentions**.
+* **Cluster Dynamics:**
+  * **Critical Cluster (Central Hub):** Dominated network volume with high organic engagement, retweets, and interactive debates.
+  * **Media Bridge Cluster:** Functioned as neutral information conduits disseminating real-time news updates across disconnected sub-networks.
+  * **Peripheral Outlier Cluster:** Composed of supportive accounts displaying localized, repetitive engagement patterns with low external reach—exhibiting hallmarks of coordinated amplification.
 
 ---
 
-## 🚀 Cara Menjalankan Proyek (Getting Started)
-
-### Prasyarat
-Pastikan Anda telah menginstal **Python 3.8+** dan modul-modul berikut:
-
-```bash
-pip install pandas numpy matplotlib seaborn plotly networkx squarify Sastrawi unidecode wordcloud nltk
-```
-
-### Menjalankan Notebook
-1. Clone repositori ini:
-   ```bash
-   git clone https://github.com/afauzan14/Public-Sentiment-Analysis-on-School-Lunch-Budget-Policy.git
-   cd Public-Sentiment-Analysis-on-School-Lunch-Budget-Policy
-   ```
-2. Buka Jupyter Notebook:
-   ```bash
-   jupyter notebook Final_Project_Data_Mining_Group_B.ipynb
-   ```
-3. Jalankan seluruh sel untuk mereproduksi analisis dan visualisasi.
+### 4. Key Opinion Leaders (Ranked by Engagement)
+* **Critical & Influential Voices:** `@realfedinuril` (38,544 total engagement), `@kkmanti` (15,644 engagement), `@hermawan_devina` (13,905 engagement), `@andikamalreza`, and `@jhonsitorus_18`.
+* **High-Efficiency Media Channels:** `@kompascom` (2,824 engagement) recorded the highest engagement rate per broadcast post.
 
 ---
 
-## 👨‍💻 Kontributor & Tim Peneliti
-
-Proyek ini disusun sebagai bagian dari *Final Project / Capstone Data Mining (Kelompok B)*:
-
-| Nama | Peran & Kontribusi |
-| :--- | :--- |
-| **Ahmad Fauzan** | **Penulis Script Code & Ekstraksi Insight Data** |
-| Dani Hidayat | Penulis Script Code & Ekstraksi Insight Data |
-| Baharuddin Syaefullah A. | Presentator & Analisis Insight |
-| Nadira Afsarina Biya | Presentator & Analisis Insight |
-| Kiara Zerlin Windriyani | Presentator & Analisis Insight |
+### 5. Dominant Hashtags
+* `#PEKNAS` (23 mentions)
+* `#Prabowo` (15 mentions)
+* `#BadanGiziNasional` (15 mentions)
+* `#MakanBergiziGratis` (12 mentions)
+* `#MBG10000Cukup` (10 mentions)
 
 ---
 
-*Dikembangkan untuk tujuan akademik, riset data mining, dan keterbukaan analisis opini publik.*
+## 💡 Strategic Policy Recommendations
 
+### 1. Regionally Adjusted Pricing Indices
+A flat Rp10,000 nationwide budget neglects stark geographic disparities in food production costs. The allocation should adopt an index-based model that adjusts per-meal budgets according to regional food consumer price indices—especially in frontier, outermost, and disadvantaged (3T) regions.
+
+### 2. Supply Chain Transparency & Digital Dashboards
+Deploy a publicly accessible digital tracking dashboard monitoring budget disbursement from the state treasury to local kitchens and final meal distribution, mitigating leakages and preserving nutritional standards.
+
+### 3. Inclusive School Canteen Integration
+Rather than relying exclusively on large industrial catering vendors, the program should integrate existing school canteens and neighborhood food cooperatives as verified suppliers, preserving local livelihoods and ensuring culturally accepted meal menus.
