@@ -1,4 +1,4 @@
-# 🍱 Public Sentiment Analysis on School Lunch Budget Policy
+# Public Sentiment Analysis on School Lunch Budget Policy
 ### Public Sentiment & Social Network Analysis (SNA) on the Rp10,000 Free Nutritious Meal (MBG) Budget Allocation on X (Twitter)
 
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
@@ -8,7 +8,7 @@
 
 ---
 
-## 📌 Project Overview & Business Understanding
+## Project Overview & Business Understanding
 
 The **Free Nutritious Meal (*Makan Bergizi Gratis* / MBG)** program is an Indonesian national strategic initiative targeting over 83 million beneficiaries—including schoolchildren, toddlers, and expectant mothers—with the primary goal of alleviating childhood stunting, improving nutritional intake, and supporting cognitive development.
 
@@ -21,7 +21,7 @@ This repository delivers a comprehensive data-driven investigation into **public
 
 ---
 
-## 🎯 Research Questions
+## Research Questions
 
 1. **What is the overall sentiment distribution** regarding the proposed Rp10,000 per meal budget policy among social media users?
 2. **What are the dominant public concerns, narratives, and critiques** emerging from conversations on X?
@@ -29,7 +29,7 @@ This repository delivers a comprehensive data-driven investigation into **public
 
 ---
 
-## 🔬 Methodology & Analytical Pipeline
+## Methodology & Analytical Pipeline
 
 ```mermaid
 flowchart LR
@@ -56,7 +56,7 @@ flowchart LR
 
 ---
 
-## 📈 Key Findings
+## Key Findings
 
 ### 1. Public Sentiment Distribution
 Across the **2,252 unique posts** analyzed:
@@ -99,7 +99,7 @@ Across the **2,252 unique posts** analyzed:
 
 ---
 
-## 💡 Strategic Policy Recommendations
+## Strategic Policy Recommendations
 
 ### 1. Regionally Adjusted Pricing Indices
 A flat Rp10,000 nationwide budget neglects stark geographic disparities in food production costs. The allocation should adopt an index-based model that adjusts per-meal budgets according to regional food consumer price indices—especially in frontier, outermost, and disadvantaged (3T) regions.
